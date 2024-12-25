@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Film{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-semibold mb-6">Create New Film</h1>
+
+        <div class="bg-white p-6 shadow-md rounded-lg">
+            <!-- Film Form -->
+            {{ include('film/_form.html.twig') }}
+        </div>
+
+        <div class="mt-6">
+            <a href="{{ path('app_film_index') }}" class="inline-block text-blue-600 hover:text-blue-800">Back to List</a>
+        </div>
+    </div>
+{% endblock %}

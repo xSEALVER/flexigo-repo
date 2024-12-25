@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Film index{% endblock %}
+
+{% block body %}
+
+{# NAVBAR #}
+<nav class="dark:bg-gray-900 shadow-md">
+    <div class="container mx-auto px-12 flex justify-between items-center h-16">
+        <!-- Logo Section -->
+        <a href="/" class="text-3xl font-bold text-blue-600">
+            Flexigo
+        </a>
+
+        <!-- Buttons Section -->
+        <div class="space-x-4 flex items-center">
+            <!-- Reservations Link -->
+            <a href="{{ path('app_cinema_index') }}" class="px-4 py-2 text-white hover:underline">
+                Cinemas
+            </a>
+
+            <a href="{{ path('app_reservation_index') }}" class="px-4 py-2 text-white hover:underline">
+                Reservations
+            </a>
+
+            <a href="{{ path('app_user_index') }}" class="px-4 py-2 text-white hover:underline">
+                Users
+            </a>
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <!-- Logout Button -->
+                <form method="POST" action="{{ path('app_logout') }}" class="inline">
+                    <button 
+                        type="submit" 
+                        class="px-4 py-2 border border-red-600 text-red-600 rounded hover:bg-red-600 hover:text-white transition duration-300">
+                        Log Out
+                    </button>
+                </form>
+            {% else %}
+                <!-- Log In and Sign In Buttons -->
+                <a href="{{ path('app_login') }}" class="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-600 hover:text-white transition duration-300">
+                    Log In
+                </a>
+                <a href="{{ path('app_register') }}" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300">
+                    Sign In
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{# NAVBAR #}
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-semibold mb-6">Film Index</h1>
+
+        <div class="bg-white p-6 shadow-md rounded-lg">
+            <table class="min-w-full table-auto border-collapse">
+                <thead>
+                    <tr class="border-b">
+                        <th class="text-left font-medium text-gray-700 py-3 px-4">Id</th>
+                        <th class="text-left font-medium text-gray-700 py-3 px-4">Titre</th>
+                        <th class="text-left font-medium text-gray-700 py-3 px-4">Genre</th>
+                        <th class="text-left font-medium text-gray-700 py-3 px-4">Date de Sortie</th>
+                        <th class="text-left font-medium text-gray-700 py-3 px-4">Price</th>
+                        <th class="text-left font-medium text-gray-700 py-3 px-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for film in films %}
+                        <tr class="border-b hover:bg-gray-100">
+                            <td class="py-3 px-4">{{ film.id }}</td>
+                            <td class="py-3 px-4">{{ film.titre }}</td>
+                            <td class="py-3 px-4">{{ film.genre }}</td>
+                            <td class="py-3 px-4">{{ film.dateSortie ? film.dateSortie|date('Y-m-d H:i:s') : '' }}</td>
+                            <td class="py-3 px-4">{{ film.price }}</td>
+                            <td class="py-3 px-4 space-x-4">
+                                <a href="{{ path('app_film_show', {'id': film.id}) }}" class="text-blue-600 hover:text-blue-800">Show</a>
+                                <a href="{{ path('app_film_edit', {'id': film.id}) }}" class="text-yellow-600 hover:text-yellow-800">Edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center py-4">No records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-6">
+            <a href="{{ path('app_film_new') }}" class="inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Create New Film</a>
+        </div>
+    </div>
+{% endblock %}

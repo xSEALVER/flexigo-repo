@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cinema{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-semibold mb-6">Cinema Details</h1>
+
+        <div class="bg-white p-6 shadow-md rounded-lg">
+            <table class="min-w-full table-auto">
+                <tbody>
+                    <tr class="border-b">
+                        <th class="text-left font-medium text-gray-700 py-2 px-4">Id</th>
+                        <td class="py-2 px-4">{{ cinema.id }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="text-left font-medium text-gray-700 py-2 px-4">Nom</th>
+                        <td class="py-2 px-4">{{ cinema.nom }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="text-left font-medium text-gray-700 py-2 px-4">Location</th>
+                        <td class="py-2 px-4">{{ cinema.location }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="text-left font-medium text-gray-700 py-2 px-4">Capacité</th>
+                        <td class="py-2 px-4">{{ cinema.capacite }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="text-left font-medium text-gray-700 py-2 px-4">Email</th>
+                        <td class="py-2 px-4">{{ cinema.email }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ path('app_cinema_index') }}" class="inline-block text-blue-600 hover:text-blue-800 mr-4">Back to list</a>
+            <a href="{{ path('app_cinema_edit', {'id': cinema.id}) }}" class="inline-block text-yellow-600 hover:text-yellow-800 mr-4">Edit</a>
+        </div>
+
+        <div class="mt-4">
+            {{ include('cinema/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

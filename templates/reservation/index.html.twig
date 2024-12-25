@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation Index{% endblock %}
+
+{% block body %}
+
+{# NAVBAR #}
+<nav class="dark:bg-gray-900 shadow-md">
+    <div class="container mx-auto px-12 flex justify-between items-center h-16">
+        <!-- Logo Section -->
+        <a href="/" class="text-3xl font-bold text-blue-600">
+            Flexigo
+        </a>
+
+        <!-- Buttons Section -->
+        <div class="space-x-4 flex items-center">
+            <!-- Reservations Link -->
+            <a href="{{ path('app_cinema_index') }}" class="px-4 py-2 text-white hover:underline">
+                Cinemas
+            </a>
+
+            <a href="{{ path('app_film_index') }}" class="px-4 py-2 text-white hover:underline">
+                Films
+            </a>
+
+            <a href="{{ path('app_user_index') }}" class="px-4 py-2 text-white hover:underline">
+                Users
+            </a>
+
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <!-- Logout Button -->
+                <form method="POST" action="{{ path('app_logout') }}" class="inline">
+                    <button 
+                        type="submit" 
+                        class="px-4 py-2 border border-red-600 text-red-600 rounded hover:bg-red-600 hover:text-white transition duration-300">
+                        Log Out
+                    </button>
+                </form>
+            {% else %}
+                <!-- Log In and Sign In Buttons -->
+                <a href="{{ path('app_login') }}" class="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-600 hover:text-white transition duration-300">
+                    Log In
+                </a>
+                <a href="{{ path('app_register') }}" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300">
+                    Sign In
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{# NAVBAR #}
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-semibold mb-6">Reservation Index</h1>
+
+        <div class="bg-white p-6 shadow-md rounded-lg mb-6">
+            <table class="min-w-full table-auto">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="py-2 px-4 text-left">Id</th>
+                        <th class="py-2 px-4 text-left">Date Reservation</th>
+                        <th class="py-2 px-4 text-left">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservation in reservations %}
+                        <tr class="border-b">
+                            <td class="py-2 px-4">{{ reservation.id }}</td>
+                            <td class="py-2 px-4">{{ reservation.dateReservation ? reservation.dateReservation|date('Y-m-d H:i:s') : '' }}</td>
+                            <td class="py-2 px-4">
+                                <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}" class="text-blue-600 hover:text-blue-800 transition duration-300">Show</a>
+                                <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}" class="ml-4 text-blue-600 hover:text-blue-800 transition duration-300">Edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3" class="py-2 px-4 text-center text-gray-600">No records found</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ path('app_reservation_new') }}" class="inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300">Create New Reservation</a>
+        </div>
+    </div>
+{% endblock %}

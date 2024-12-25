@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Cinema{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-semibold mb-6">Edit Cinema</h1>
+
+        <!-- Form to update cinema -->
+        <div class="bg-white shadow-md rounded-lg p-8 mb-4">
+            {{ include('cinema/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+
+        <!-- Back to list link -->
+        <div class="mb-4">
+            <a href="{{ path('app_cinema_index') }}" class="text-blue-500 hover:text-blue-700">
+                &larr; Back to list
+            </a>
+        </div>
+
+        <!-- Delete form -->
+        <div>
+            {{ include('cinema/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Cinema{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-semibold mb-6">Create New Cinema</h1>
+
+        <div class="bg-white p-6 shadow-md rounded-lg">
+            {{ include('cinema/_form.html.twig') }}
+        </div>
+
+        <div class="mt-4">
+            <a href="{{ path('app_cinema_index') }}" class="inline-block text-blue-600 hover:text-blue-800">Back to list</a>
+        </div>
+    </div>
+{% endblock %}

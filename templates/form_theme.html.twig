@@ -1,0 +1,8 @@
+{# templates/form_theme.html.twig #}
+{% block form_row %}
+<div class="form-group">
+    {{ form_label(form) }}
+    {{ form_widget(form, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form) }}
+</div>
+{% endblock %}
