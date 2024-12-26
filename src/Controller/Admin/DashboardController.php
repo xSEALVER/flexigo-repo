@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets; // Correct namespace for Assets
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;  // Corrected namespace for Actions
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;  // Correct namespace for Action
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;  // Add the use statement for Crud
@@ -23,9 +24,6 @@ class DashboardController extends AbstractDashboardController
     #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        
          return $this->render('admin/index.html.twig');
     }
 
@@ -33,6 +31,7 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Flexigo');
+            
     }
 
     public function configureMenuItems(): iterable
@@ -52,14 +51,18 @@ class DashboardController extends AbstractDashboardController
         return parent::configureActions()
         ->add(Crud::PAGE_INDEX, Action::DETAIL);
 
-        
     }
 
-    
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
